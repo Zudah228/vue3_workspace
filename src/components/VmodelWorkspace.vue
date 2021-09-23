@@ -28,7 +28,7 @@
 </template>
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'VmodelWorkspace',
   props: {
     // TODO: 初期値の設定をする
     // TODO: 非同期で初期値を取得する

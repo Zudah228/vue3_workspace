@@ -1,4 +1,6 @@
 # vue3-workspace
+Vue 3 の機能を試して使用感などを確かめるためのやつ
+1. v-model
 
 ## Project setup
 ```

@@ -1,7 +1,7 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
   <h1>v-model test</h1>
-  <HelloWorld
+  <VmodelWorkspace
     v-model:title="title"
     v-model:subTitle="subTitle"
     v-model:color="color" />
@@ -15,11 +15,11 @@
   <p>Checkbox: {{ checkboxArray }}</p>
 </template>
 <script lang="js">
-import HelloWorld from './components/HelloWorld.vue'
+import VmodelWorkspace from './components/VmodelWorkspace.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    VmodelWorkspace,
   },
   data() {
     return {
