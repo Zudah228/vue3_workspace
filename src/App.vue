@@ -11,6 +11,8 @@
   <p :style="{ color: color }">
     color: {{ color }}
   </p>
+  <p>Radio: {{ radioValue }}</p>
+  <p>Checkbox: {{ checkboxArray }}</p>
 </template>
 <script lang="js">
 import HelloWorld from './components/HelloWorld.vue'
@@ -24,6 +26,8 @@ export default {
       title: '',
       subTitle: '',
       color: '#000000',
+      radioValue: '',
+      checkboxArray: [],
     }
   },
 }

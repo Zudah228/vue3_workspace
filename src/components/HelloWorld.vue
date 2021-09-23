@@ -21,12 +21,17 @@
       type="color"
       :value="color"
       @input="changeColor($event.target.value)">
+      <!-- TODO: DatePick Input -->
+      <!-- TODO: Checkbox Input -->
+      <!-- TODO: Radio Input -->
   </div>
 </template>
 <script>
 export default {
   name: 'HelloWorld',
   props: {
+    // TODO: 初期値の設定をする
+    // TODO: 非同期で初期値を取得する
     title: String,
     subTitle: String,
     color: String,
