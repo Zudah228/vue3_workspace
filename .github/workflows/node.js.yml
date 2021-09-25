@@ -6,7 +6,7 @@ name: Node.js CI
 on: pull_request
 
 jobs:
-  build:
+  build_and_preview:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
