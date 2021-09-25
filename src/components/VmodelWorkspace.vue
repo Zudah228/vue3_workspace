@@ -9,6 +9,7 @@
       <input
         type="text"
         class="text-input"
+        :value="title"
         @input="changeTitle($event.target.value)">
     </div>
     <div class="text-form">
@@ -18,6 +19,7 @@
       <input
         type="text"
         class="text-input"
+        :value="subTitle"
         @input="changeSubTitle($event.target.value)">
     </div>
 
@@ -44,6 +46,7 @@
       <p>radio: </p>
       <div v-for="(country, i) in countries" :key="i">
         <input
+          v-model="radio"
           type="radio"
           name="radio"
           :id="country"
@@ -58,7 +61,7 @@
       <p>checkbox: </p>
       <div v-for="(tomato, i) in tomatoes" :key="i">
         <input
-          v-model="model"
+          v-model="checkboxModel"
           type="checkbox"
           name="checkbox"
           :id="tomato"
@@ -87,6 +90,7 @@ export default {
     color: String,
     date: String,
     radioValue: String,
+    checkbox: Array,
     file: File,
   },
   emits: [
@@ -102,8 +106,13 @@ export default {
     return {
       countries: ['Japan', 'USA', 'China'],
       tomatoes: ['トマト', 'プチトマト', 'ホールトマト缶', 'カットトマト缶'],
-      model: [],
+      checkboxModel: [],
+      radio: '',
     }
+  },
+  mounted() {
+    this.checkboxModel = this.checkbox
+    this.radio = this.radioValue
   },
   methods: {
     changeTitle(title) {
@@ -122,7 +131,7 @@ export default {
       this.$emit('update:radioValue', value)
     },
     changeCheckbox() {
-      this.$emit('update:checkbox', this.model)
+      this.$emit('update:checkbox', this.checkboxModel)
     },
     changeFile(file) {
       this.$emit('update:file', file)
