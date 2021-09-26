@@ -11,6 +11,7 @@
         class="text-input"
         :value="title"
         @input="changeTitle($event.target.value)">
+      <p>{{ title }}</p>
     </div>
     <div class="text-form">
 
@@ -21,6 +22,7 @@
         class="text-input"
         :value="subTitle"
         @input="changeSubTitle($event.target.value)">
+      <p>{{ subTitle }}</p>
     </div>
 
     <!-- Color Input -->
@@ -30,6 +32,7 @@
         type="color"
         :value="color"
         @input="changeColor($event.target.value)">
+      <p>{{ color }}</p>
       </div>
 
     <!-- Date Input -->
@@ -46,7 +49,7 @@
       <p>radio: </p>
       <div v-for="(country, i) in countries" :key="i">
         <input
-          v-model="radio"
+          v-model="radioModel"
           type="radio"
           name="radio"
           :id="country"
@@ -54,6 +57,7 @@
           @input="changeRadioValue($event.target.value)" >
         <label :for="country">{{ country }}</label>
       </div>
+      <p class="radio-value">{{ radioValue }}</p>
     </div>
 
     <!-- Checkbox Input -->
@@ -107,12 +111,12 @@ export default {
       countries: ['Japan', 'USA', 'China'],
       tomatoes: ['トマト', 'プチトマト', 'ホールトマト缶', 'カットトマト缶'],
       checkboxModel: [],
-      radio: '',
+      radioModel: '',
     }
   },
   mounted() {
     this.checkboxModel = this.checkbox
-    this.radio = this.radioValue
+    this.radioModel = this.radioValue
   },
   methods: {
     changeTitle(title) {
@@ -159,6 +163,11 @@ input {
   height: min-content;
   padding: 4px;
   text-align: start;
+}
+.radio-value {
+  display: flex;
+  align-items: center;
+  margin: 10px;
 }
 .text-form {
   display: flex;

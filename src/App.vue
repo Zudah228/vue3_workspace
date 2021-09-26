@@ -24,7 +24,7 @@
       <p>Checkbox: {{ checkboxArray }}</p>
       <div>
         <p>File: </p>
-        <img :src="imgURL">
+        <img :src="imgURL" :style="{ maxHeight: '100px' }">
       </div>
     </div>
   </div>
