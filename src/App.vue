@@ -1,9 +1,14 @@
 <template>
   <img alt="Vue logo" src="./assets/logo.png">
+  <h1>Composition API</h1>
+  <input type="text" v-model="lastName">
+  <input type="text" v-model="firstName">
+  <p>{{ fullName }}</p>
   <h1>v-model test</h1>
   <div class="main">
     <VmodelWorkspace
       class="width-half-screen"
+      @display-alert="displayAlert"
       v-model:title="title"
       v-model:subTitle="subTitle"
       v-model:color="color"
@@ -29,33 +34,54 @@
     </div>
   </div>
 </template>
-<script lang="js">
+<script>
+import { defineComponent, ref, computed } from 'vue'
 import VmodelWorkspace from './components/VmodelWorkspace.vue'
-export default {
+export default defineComponent ({
   name: 'App',
   components: {
     VmodelWorkspace,
   },
-  data() {
+  setup() {
+    // refs
+    const firstName = ref('Yamato')
+    const lastName = ref('Tsuda')
+    const fullName = computed(() => lastName.value + ' ' + firstName.value )
+
+    const title = ref('初期値')
+    const subTitle = ref('初期値')
+    const color = ref('#42b983')
+    const date = ref('2021-01-01')
+    const radioValue = ref('Japan')
+    const checkboxArray = ref(['トマト'])
+  
+    const file = ref({})
+    const imgURL = computed(() => {
+      if (file.value?.name) {
+        return window.URL.createObjectURL(file.value)
+      } return ''
+    })
+
+    const displayAlert = ({title, subTitle}) => {
+      alert(`title: ${title}\nsubTitle: ${subTitle}\n`)
+    }
+
     return {
-      title: '初期値',
-      subTitle: '初期値',
-      color: '#42b983',
-      date: '2021-01-01',
-      radioValue: 'Japan',
-      checkboxArray: ['トマト'],
-      file: {},
+      title,
+      subTitle,
+      color,
+      date,
+      radioValue,
+      checkboxArray,
+      file,
+      firstName,
+      lastName,
+      fullName,
+      imgURL,
+      displayAlert
     }
   },
-  computed: {
-    imgURL() {
-      if (this.file.name) {
-        return window.URL.createObjectURL(this.file)
-      }
-      return ''
-    },
-  },
-}
+})
 </script>
 
 <style>
