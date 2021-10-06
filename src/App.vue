@@ -24,7 +24,7 @@
       <p>Checkbox: {{ checkboxArray }}</p>
       <div>
         <p>File: </p>
-        <img :src="imgURL">
+        <img :src="imgURL" :style="{ maxHeight: '100px' }">
       </div>
     </div>
   </div>
@@ -38,12 +38,12 @@ export default {
   },
   data() {
     return {
-      title: '',
-      subTitle: '',
-      color: '#000000',
+      title: '初期値',
+      subTitle: '初期値',
+      color: '#42b983',
       date: '2021-01-01',
-      radioValue: '',
-      checkboxArray: [],
+      radioValue: 'Japan',
+      checkboxArray: ['トマト'],
       file: {},
     }
   },

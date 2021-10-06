@@ -9,7 +9,9 @@
       <input
         type="text"
         class="text-input"
+        :value="title"
         @input="changeTitle($event.target.value)">
+      <p>{{ title }}</p>
     </div>
     <div class="text-form">
 
@@ -18,7 +20,9 @@
       <input
         type="text"
         class="text-input"
+        :value="subTitle"
         @input="changeSubTitle($event.target.value)">
+      <p>{{ subTitle }}</p>
     </div>
 
     <!-- Color Input -->
@@ -28,6 +32,7 @@
         type="color"
         :value="color"
         @input="changeColor($event.target.value)">
+      <p>{{ color }}</p>
       </div>
 
     <!-- Date Input -->
@@ -44,6 +49,7 @@
       <p>radio: </p>
       <div v-for="(country, i) in countries" :key="i">
         <input
+          v-model="radioModel"
           type="radio"
           name="radio"
           :id="country"
@@ -51,6 +57,7 @@
           @input="changeRadioValue($event.target.value)" >
         <label :for="country">{{ country }}</label>
       </div>
+      <p class="radio-value">{{ radioValue }}</p>
     </div>
 
     <!-- Checkbox Input -->
@@ -58,7 +65,7 @@
       <p>checkbox: </p>
       <div v-for="(tomato, i) in tomatoes" :key="i">
         <input
-          v-model="model"
+          v-model="checkboxModel"
           type="checkbox"
           name="checkbox"
           :id="tomato"
@@ -87,6 +94,7 @@ export default {
     color: String,
     date: String,
     radioValue: String,
+    checkbox: Array,
     file: File,
   },
   emits: [
@@ -102,8 +110,13 @@ export default {
     return {
       countries: ['Japan', 'USA', 'China'],
       tomatoes: ['トマト', 'プチトマト', 'ホールトマト缶', 'カットトマト缶'],
-      model: [],
+      checkboxModel: [],
+      radioModel: '',
     }
+  },
+  mounted() {
+    this.checkboxModel = this.checkbox
+    this.radioModel = this.radioValue
   },
   methods: {
     changeTitle(title) {
@@ -122,7 +135,7 @@ export default {
       this.$emit('update:radioValue', value)
     },
     changeCheckbox() {
-      this.$emit('update:checkbox', this.model)
+      this.$emit('update:checkbox', this.checkboxModel)
     },
     changeFile(file) {
       this.$emit('update:file', file)
@@ -150,6 +163,11 @@ input {
   height: min-content;
   padding: 4px;
   text-align: start;
+}
+.radio-value {
+  display: flex;
+  align-items: center;
+  margin: 10px;
 }
 .text-form {
   display: flex;
