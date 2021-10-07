@@ -35,7 +35,7 @@
   </div>
 </template>
 <script>
-import { defineComponent, ref, computed } from 'vue'
+import { defineComponent, watch, ref, computed } from 'vue'
 import VmodelWorkspace from './components/VmodelWorkspace.vue'
 export default defineComponent ({
   name: 'App',
@@ -53,6 +53,10 @@ export default defineComponent ({
     const color = ref('#42b983')
     const date = ref('2021-01-01')
     const radioValue = ref('Japan')
+    watch(radioValue, (next, prev) => {
+      console.log(`radio changed\n${prev} => ${next}`)
+    })
+
     const checkboxArray = ref(['トマト'])
   
     const file = ref({})
