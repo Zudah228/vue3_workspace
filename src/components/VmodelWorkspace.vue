@@ -81,13 +81,16 @@
       <input type="file" @input="changeFile($event.target.files[0])">
     </div>
 
+    <button type="submit" @click="displayAlert()">
+      表示
+    </button>
   </div>
 </template>
 <script>
-export default {
+import { defineComponent, ref,} from 'vue'
+export default defineComponent ({
   name: 'VmodelWorkspace',
   props: {
-    // TODO: 初期値の設定をする
     // TODO: 非同期で初期値を取得する
     title: String,
     subTitle: String,
@@ -95,53 +98,76 @@ export default {
     date: String,
     radioValue: String,
     checkbox: Array,
-    file: File,
+    file: Object,
   },
-  emits: [
-    'update:title',
-    'update:subTitle',
-    'update:color',
-    'update:date',
-    'update:radioValue',
-    'update:checkbox',
-    'update:file',
-  ],
-  data() {
+  emits: {
+    'update:title': null,
+    'update:subTitle': null,
+    'update:color': null,
+    'update:date': null,
+    'update:radioValue': null,
+    'update:checkbox': null,
+    'update:file': null,
+    'display-alert': ({title, subTitle}) => {
+      if (title && subTitle) {
+        return true
+      } else {
+        console.warn('必須項目を入力してください')
+        return false
+      }
+    },
+  },
+  setup(props, { emit }) {
+    // constants
+    const countries = ['Japan', 'USA', 'China']
+    const tomatoes = ['トマト', 'プチトマト', 'ホールトマト缶', 'カットトマト缶']
+
+    // refs
+    const checkboxModel = ref(props.checkbox)
+    const radioModel = ref(props.radioValue)
+
+    // emits
+    const changeTitle = (title) => {
+      emit('update:title', title)
+    }
+    const changeSubTitle = (subTitle) => {
+      emit('update:subTitle', subTitle)
+    }
+    const changeColor = (color) => {
+      emit('update:color', color)
+    }
+    const changeDate = (date) => {
+      emit('update:date', date)
+    }
+    const changeRadioValue = (value) => {
+      emit('update:radioValue', value)
+    }
+    const changeCheckbox = () => {
+      emit('update:checkbox', checkboxModel.value)
+    }
+    const changeFile = (file) => {
+      emit('update:file', file)
+    }
+    const displayAlert = () => {
+      emit('display-alert', { title: props.title, subTitle: props.subTitle })
+    }
+
     return {
-      countries: ['Japan', 'USA', 'China'],
-      tomatoes: ['トマト', 'プチトマト', 'ホールトマト缶', 'カットトマト缶'],
-      checkboxModel: [],
-      radioModel: '',
+      countries,
+      tomatoes,
+      checkboxModel,
+      radioModel,
+      changeTitle,
+      changeSubTitle,
+      changeColor,
+      changeDate,
+      changeRadioValue,
+      changeCheckbox,
+      changeFile,
+      displayAlert,
     }
   },
-  mounted() {
-    this.checkboxModel = this.checkbox
-    this.radioModel = this.radioValue
-  },
-  methods: {
-    changeTitle(title) {
-      this.$emit('update:title', title) 
-    },
-    changeSubTitle(subTitle) {
-      this.$emit('update:subTitle', subTitle)
-    },
-    changeColor(color) {
-      this.$emit('update:color', color)
-    },
-    changeDate(date) {
-      this.$emit('update:date', date)
-    },
-    changeRadioValue(value) {
-      this.$emit('update:radioValue', value)
-    },
-    changeCheckbox() {
-      this.$emit('update:checkbox', this.checkboxModel)
-    },
-    changeFile(file) {
-      this.$emit('update:file', file)
-    },
-  }
-}
+})
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
